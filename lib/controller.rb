@@ -28,9 +28,6 @@ class Controller
     @cookbook.remove_recipe(index - 1)
   end
 
-  def destroy_all
-    @cookbook.recipes = []
-  end
 
   def import_recipe
     keyword = @view.ask_user_for_keyword
@@ -77,6 +74,8 @@ class Controller
     recipe = @cookbook.find(index)
 
     recipe.mark_as_done
+
+    @cookbook.save
   end
 
 end

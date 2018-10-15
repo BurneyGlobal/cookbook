@@ -1,12 +1,12 @@
 class Recipe
-  attr_reader :name, :description, :prep_time, :difficulty
+  attr_reader :name, :description, :prep_time, :difficulty, :done
 
-  def initialize(name, description, prep_time = "Dono brow", difficulty)
+  def initialize(name, description, prep_time = "Dono brow", difficulty, done)
     @name = name
     @description = description
     @prep_time = prep_time
     @difficulty = difficulty
-    @done = false
+    @done = done
   end
 
   def done?

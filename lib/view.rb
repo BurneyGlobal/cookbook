@@ -22,7 +22,7 @@ class CookbookView
   end
 
   def ask_user_for_index
-    puts "Please enter a recipe index you would like to delete"
+    puts "Please enter a recipe index"
     return gets.chomp.to_i
   end
 
