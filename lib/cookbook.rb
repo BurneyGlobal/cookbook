@@ -9,7 +9,8 @@ class Cookbook
     @recipes = []
 
     CSV.foreach(@csv_file_path) do |row|
-      @recipes << Recipe.new(row[0], row[1], row[2], row[3], row[4])
+      boolean = row[4].to_s == "true"
+      @recipes << Recipe.new(row[0], row[1], row[2], row[3], boolean)
     end
   end
 
@@ -47,9 +48,7 @@ class Cookbook
         csv << [recipe.name, recipe.description, recipe.prep_time, recipe.difficulty, recipe.done]
       end
     end
-
   end
-
 end
 
 
