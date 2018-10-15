@@ -24,4 +24,21 @@ class CookbookView
     puts "Please enter a recipe index you would like to delete"
     return gets.chomp.to_i
   end
+
+  def ask_user_for_keyword
+    puts "Please choose a ingredient you'd like to search"
+    gets.chomp
+  end
+
+  def display_search_results(search_recipes)
+    search_recipes.each_with_index do |recipe, index|
+      puts "#{index + 1}. #{recipe.name}\n"
+    end
+  end
+
+  def which_index_keep
+    puts "Select recipe to import"
+    gets.chomp
+  end
+
 end
