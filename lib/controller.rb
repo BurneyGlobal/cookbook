@@ -1,5 +1,6 @@
 require_relative 'cookbook'
 require_relative 'view'
+require_relative 'scrape_lets_cook_french_service'
 require 'nokogiri'
 require 'pry-byebug'
 require 'open-uri'
@@ -28,34 +29,12 @@ class Controller
     @cookbook.remove_recipe(index - 1)
   end
 
-
   def import_recipe
     keyword = @view.ask_user_for_keyword
-    url = "http://www.letscookfrench.com/recipes/find-recipe.aspx?aqt=#{keyword}"
-    doc = Nokogiri::HTML(open(url), nil, 'utf-8')
 
-    search_recipes = []
+    scraping = ScrapeLetsCookFrenchService.new(keyword)
 
-    doc.search('.m_contenu_resultat').each do |element|
-      name = element.search('.m_titre_resultat a')
-      description = element.search('.m_texte_resultat')
-
-      name = name.text.strip
-      description = description.text.strip
-
-      prep_time = element.search('.m_prep_time').first.parent
-      prep_time = prep_time.text.strip
-
-      difficulty = element.search('.m_detail_recette')
-      difficulty = difficulty.text.strip
-      difficulty = difficulty.split('-')
-      difficulty = difficulty[2].strip
-
-      recipe = Recipe.new(name, description, prep_time, difficulty)
-      search_recipes << recipe
-    end
-
-    search_recipes = search_recipes[(0..4)]
+    search_recipes = scraping.call
 
     @view.display_search_results(search_recipes)
 
@@ -77,5 +56,4 @@ class Controller
 
     @cookbook.save
   end
-
 end
