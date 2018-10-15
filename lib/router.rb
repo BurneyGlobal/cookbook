@@ -24,9 +24,11 @@ class Router
     when 2 then @controller.create
     when 3 then @controller.destroy
     when 4 then @controller.import_recipe
-    when 5 then stop
+    when 5 then @controller.mark_as_done
+    when 6 then @controller.destroy_all
+    when 7 then stop
     else
-      puts "Please press 1, 2, 3, 4 or 5"
+      puts "Please press 1, 2, 3, 4, 5, 6 or 7"
     end
   end
 
@@ -41,6 +43,8 @@ class Router
     puts "2 - Create a new recipe"
     puts "3 - Destroy a recipe"
     puts "4 - Import a recipe from LetsCookFrench"
-    puts "5 - Stop and exit the program"
+    puts "5 - Mark a recipe as done"
+    puts "6 - Destroy all!"
+    puts "7 - Stop and exit the program"
   end
 end

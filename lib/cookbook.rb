@@ -8,7 +8,7 @@ class Cookbook
     @recipes = []
 
     CSV.foreach(@csv_file_path) do |row|
-      @recipes << Recipe.new(row[0], row[1])
+      @recipes << Recipe.new(row[0], row[1], row[2], row[3])
     end
   end
 
@@ -21,7 +21,7 @@ class Cookbook
 
     CSV.open(@csv_file_path, 'wb') do |csv|
       @recipes.each do |element|
-        csv << [element.name, element.description]
+        csv << [element.name, element.description, element.prep_time, element.difficulty]
       end
     end
   end
@@ -31,10 +31,15 @@ class Cookbook
 
     CSV.open(@csv_file_path, 'wb') do |csv|
       @recipes.each do |recipe|
-        csv << [recipe.name, recipe.description]
+        csv << [recipe.name, recipe.description, recipe.prep_time, recipe.difficulty]
       end
     end
   end
+
+  def find(index)
+    @recipes[index - 1]
+  end
+
 end
 
 

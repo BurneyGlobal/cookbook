@@ -6,7 +6,8 @@ require_relative 'router'
 class CookbookView
   def display(recipes)
     recipes.each_with_index do |recipe, index|
-      puts "#{index + 1}. #{recipe.name}\nDescription: #{recipe.description}"
+      done = recipe.done? ? "[X]" : "[ ]"
+      puts "#{index + 1}. #{done} #{recipe.name}\nDescription: #{recipe.description}\nPrep time: #{recipe.prep_time}\nDifficulty: #{recipe.difficulty}"
     end
   end
 
